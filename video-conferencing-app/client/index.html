@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Video Conferencing App</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f4f4f4; }
+    input, button { padding: 10px; margin: 5px; }
+    #logs { margin-top: 20px; background: #fff; padding: 10px; height: 200px; overflow-y: scroll; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+
+  <h1>Join Video Conference Room</h1>
+  <input id="roomId" placeholder="Enter Room ID" />
+  <input id="userId" placeholder="Enter Your Name / ID" />
+  <button onclick="joinRoom()">Join Room</button>
+
+  <div id="logs"></div>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script>
+    const socket = io("http://localhost:5000");
+
+    function log(msg) {
+      const div = document.getElementById("logs");
+      div.innerHTML += `<p>${msg}</p>`;
+    }
+
+    function joinRoom() {
+      const roomId = document.getElementById("roomId").value.trim();
+      const userId = document.getElementById("userId").value.trim();
+
+      if (!roomId || !userId) {
+        alert("Please enter both Room ID and User ID");
+        return;
+      }
+
+      socket.emit("join-room", roomId, userId);
+      log(`You joined room ${roomId} as ${userId}`);
+
+      socket.on("user-connected", (user) => {
+        log(`🟢 User connected: ${user}`);
+      });
+
+      socket.on("user-disconnected", (user) => {
+        log(`🔴 User disconnected: ${user}`);
+      });
+    }
+  </script>
+
+</body>
+</html>
