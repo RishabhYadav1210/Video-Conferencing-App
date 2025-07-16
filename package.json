@@ -1,0 +1,24 @@
+{
+  "name": "ravel",
+  "version": "1.0.0",
+  "description": "Ravel - Video Conferencing App",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Rishabh Yadav",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RishabhYadav1210/Video-Conferencing-App.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/RishabhYadav1210/Video-Conferencing-App/issues"
+  },
+  "homepage": "https://github.com/RishabhYadav1210/Video-Conferencing-App#readme"
+}
